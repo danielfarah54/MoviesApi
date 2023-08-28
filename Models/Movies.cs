@@ -4,6 +4,10 @@ namespace MoviesApi.Models;
 
 public class Movie
 {
+  [Key]
+  [Required]
+  public int Id { get; internal set; }
+
   [Required(ErrorMessage = "Please provide a title for the movie")]
   [MaxLength(100, ErrorMessage = "The title cannot be longer than 100 characters")]
   public string Title { get; set; }
