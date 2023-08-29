@@ -30,10 +30,12 @@ public class MoviesController : ControllerBase
   }
 
   [HttpGet]
-  public IEnumerable<Movie> GetMovies([FromQuery] int page = 1)
+  public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int page = 1)
   {
     int pageSize = 5;
-    return _context.Movies.Skip((page - 1) * pageSize).Take(pageSize);
+    return _mapper.Map<List<ReadMovieDto>>(
+      _context.Movies.Skip((page - 1) * pageSize).Take(pageSize)
+    );
   }
 
   [HttpGet("{id}")]
@@ -44,7 +46,9 @@ public class MoviesController : ControllerBase
     {
       return NotFound();
     }
-    return Ok(movie);
+
+    var movieDto = _mapper.Map<ReadMovieDto>(movie);
+    return Ok(movieDto);
   }
 
   [HttpPut("{id}")]
