@@ -20,7 +20,14 @@ public class MoviesController : ControllerBase
     _mapper = mapper;
   }
 
+  /// <summary>
+  /// Add a new movie to the database
+  /// </summary>
+  /// <param name="movieDto">The movie to add</param>
+  /// <returns>IActionResult</returns>
+  /// <response code="201">Returns the newly created movie</response>
   [HttpPost]
+  [ProducesResponseType(StatusCodes.Status201Created)]
   public IActionResult AddMovie([FromBody] CreateMovieDto movieDto)
   {
     Movie movie = _mapper.Map<Movie>(movieDto);
