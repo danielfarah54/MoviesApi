@@ -10,4 +10,6 @@ public class MovieContext : DbContext
   }
 
   public DbSet<Movie> Movies { get; set; } = default!;
+  public DbSet<MovieTheater> MovieTheaters { get; set; } = default!;
+  public DbSet<Address> Addresses { get; set; } = default!;
 }
