@@ -9,3 +9,12 @@ db-up:
 
 db-down:
 	docker compose down
+
+migration:
+	dotnet ef migrations add $(name)
+
+update-migration:
+	dotnet ef database update
+
+remove-migration:
+	dotnet ef migrations remove
