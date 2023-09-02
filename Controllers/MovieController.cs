@@ -20,14 +20,7 @@ public class MovieController : ControllerBase
     _mapper = mapper;
   }
 
-  /// <summary>
-  /// Add a new movie to the database
-  /// </summary>
-  /// <param name="movieDto">The movie to add</param>
-  /// <returns>IActionResult</returns>
-  /// <response code="201">Returns the newly created movie</response>
   [HttpPost]
-  [ProducesResponseType(StatusCodes.Status201Created)]
   public IActionResult AddMovie([FromBody] CreateMovieDto movieDto)
   {
     Movie movie = _mapper.Map<Movie>(movieDto);
@@ -41,7 +34,7 @@ public class MovieController : ControllerBase
   {
     int pageSize = 5;
     return _mapper.Map<List<ReadMovieDto>>(
-      _context.Movies.Skip((page - 1) * pageSize).Take(pageSize)
+      _context.Movies.Skip((page - 1) * pageSize).Take(pageSize).ToList()
     );
   }
 

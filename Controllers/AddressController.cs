@@ -34,7 +34,7 @@ public class AddressController : ControllerBase
   {
     int pageSize = 5;
     return _mapper.Map<List<ReadAddressDto>>(
-      _context.Addresses.Skip((page - 1) * pageSize).Take(pageSize)
+      _context.Addresses.Skip((page - 1) * pageSize).Take(pageSize).ToList()
     );
   }
 
