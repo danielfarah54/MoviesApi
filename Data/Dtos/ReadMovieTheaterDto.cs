@@ -6,5 +6,5 @@ public class ReadMovieTheaterDto
 
   public string Name { get; set; }
 
-  public ReadAddressDto ReadAddressDto { get; set; }
+  public ReadAddressDto Address { get; set; }
 }

@@ -11,6 +11,10 @@ public class MovieTheaterProfile : Profile
     CreateMap<CreateMovieTheaterDto, MovieTheater>();
     CreateMap<UpdateMovieTheaterDto, MovieTheater>();
     CreateMap<MovieTheater, UpdateMovieTheaterDto>();
-    CreateMap<MovieTheater, ReadMovieTheaterDto>();
+    CreateMap<MovieTheater, ReadMovieTheaterDto>()
+      .ForMember(
+        movieTheaterDto => movieTheaterDto.Address,
+        options => options.MapFrom(movieTheater => movieTheater.Address)
+      );
   }
 }
