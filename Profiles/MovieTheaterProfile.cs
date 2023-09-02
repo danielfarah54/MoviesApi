@@ -15,6 +15,10 @@ public class MovieTheaterProfile : Profile
       .ForMember(
         movieTheaterDto => movieTheaterDto.Address,
         options => options.MapFrom(movieTheater => movieTheater.Address)
+      )
+      .ForMember(
+        movieTheaterDto => movieTheaterDto.Sessions,
+        options => options.MapFrom(movieTheater => movieTheater.Sessions)
       );
   }
 }

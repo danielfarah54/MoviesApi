@@ -11,6 +11,10 @@ public class MovieProfile : Profile
     CreateMap<CreateMovieDto, Movie>();
     CreateMap<UpdateMovieDto, Movie>();
     CreateMap<Movie, UpdateMovieDto>();
-    CreateMap<Movie, ReadMovieDto>();
+    CreateMap<Movie, ReadMovieDto>()
+      .ForMember(
+        movieDto => movieDto.Sessions,
+        options => options.MapFrom(movie => movie.Sessions)
+      );
   }
 }
