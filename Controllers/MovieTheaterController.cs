@@ -34,7 +34,7 @@ public class MovieTheaterController : ControllerBase
   {
     int pageSize = 5;
     return _mapper.Map<List<ReadMovieTheaterDto>>(
-      _context.MovieTheaters.Skip((page - 1) * pageSize).Take(pageSize)
+      _context.MovieTheaters.Skip((page - 1) * pageSize).Take(pageSize).ToList()
     );
   }
 
