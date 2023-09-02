@@ -4,9 +4,9 @@ namespace MoviesApi.Data.Dtos;
 
 public class ReadAddressDto
 {
-  public int Id { get; set; }
+  public int Id { get; set; } = default!;
 
-  public string Street { get; set; }
+  public string Street { get; set; } = default!;
 
-  public int Number { get; set; }
+  public int Number { get; set; } = default!;
 }
