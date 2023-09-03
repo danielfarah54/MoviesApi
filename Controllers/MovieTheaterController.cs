@@ -4,6 +4,7 @@ using MoviesApi.Models;
 using MoviesApi.Data;
 using MoviesApi.Data.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 
 namespace MoviesApi.Controllers;
 
@@ -30,11 +31,19 @@ public class MovieTheaterController : ControllerBase
   }
 
   [HttpGet]
-  public IEnumerable<ReadMovieTheaterDto> GetMovieTheaters([FromQuery] int page = 1)
+  public IEnumerable<ReadMovieTheaterDto> GetMovieTheaters([FromQuery] int page = 1, [FromQuery] int? addressId = null)
   {
     int pageSize = 5;
+
+    if (addressId == null)
+    {
+      return _mapper.Map<List<ReadMovieTheaterDto>>(
+        _context.MovieTheaters.Skip((page - 1) * pageSize).Take(pageSize).ToList()
+      );
+    }
+
     return _mapper.Map<List<ReadMovieTheaterDto>>(
-      _context.MovieTheaters.Skip((page - 1) * pageSize).Take(pageSize).ToList()
+      _context.MovieTheaters.Where(movieTheater => movieTheater.AddressId == addressId).Skip((page - 1) * pageSize).Take(pageSize).ToList()
     );
   }
 

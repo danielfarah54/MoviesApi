@@ -30,12 +30,24 @@ public class MovieController : ControllerBase
   }
 
   [HttpGet]
-  public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int page = 1)
+  public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int page = 1, [FromQuery] string? movieTheaterName = null)
   {
     int pageSize = 5;
+
+    if (movieTheaterName == null)
+    {
+      return _mapper.Map<List<ReadMovieDto>>(
+        _context.Movies.Skip((page - 1) * pageSize).Take(pageSize).ToList()
+      );
+    }
+
     return _mapper.Map<List<ReadMovieDto>>(
-      _context.Movies.Skip((page - 1) * pageSize).Take(pageSize).ToList()
-    );
+        _context.Movies
+          .Skip((page - 1) * pageSize)
+          .Take(pageSize)
+          .Where(movie => movie.Sessions.Any(session => session.MovieTheater.Name == movieTheaterName))
+          .ToList()
+      );
   }
 
   [HttpGet("{id}")]
